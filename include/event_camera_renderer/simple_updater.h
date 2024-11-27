@@ -36,8 +36,8 @@ public:
   // ---------- inherited from EventProcessor
   inline void eventCD(uint64_t, uint16_t ex, uint16_t ey, uint8_t polarity) override
   {
-    const uint32_t offset = ex * 3 + img_->step * ey + (polarity ? 0 : 2);
-    img_->data[offset] = 255;
+    const uint32_t offset = ex * 2 + img_->step * ey + (polarity ? 0 : 1);
+    img_->data[offset] += 1;
   }
   void eventExtTrigger(uint64_t, uint8_t, uint8_t) override {}
 
