@@ -35,7 +35,6 @@ Renderer::Renderer(const rclcpp::NodeOptions & options)
     RCLCPP_ERROR_STREAM(this->get_logger(), "invalid display type: " << displayType);
     throw std::runtime_error("invalid display type!");
   }
-  this->get_parameter_or("subsampling_factor", subsampling_, 1);
   double fps;
   this->get_parameter_or("fps", fps, 25.0);
   sliceTime_ = 1.0 / fps;
@@ -107,8 +106,8 @@ void Renderer::eventMsg(EventPacket::ConstSharedPtr msg)
     encoding_ != msg->encoding) {
     encoding_ = msg->encoding;
     imageMsgTemplate_.header = msg->header;
-    imageMsgTemplate_.width = msg->width / subsampling_;
-    imageMsgTemplate_.height = msg->height / subsampling_;
+    imageMsgTemplate_.width = msg->width;
+    imageMsgTemplate_.height = msg->height;
     imageMsgTemplate_.encoding = "8UC2";  // TODO: enough?
     imageMsgTemplate_.is_bigendian = check_endian::isBigEndian();
     imageMsgTemplate_.step = 2 * imageMsgTemplate_.width;

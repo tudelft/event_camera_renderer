@@ -43,7 +43,6 @@ private:
   std::shared_ptr<Display> display_;
   rclcpp::TimerBase::SharedPtr frameTimer_;
   rclcpp::TimerBase::SharedPtr subscriptionCheckTimer_;
-  int subsampling_;  // subsampling factor
   double sliceTime_;  // duration of one frame
   rclcpp::Subscription<event_camera_msgs::msg::EventPacket>::SharedPtr eventSub_;
   image_transport::Publisher imagePub_;
